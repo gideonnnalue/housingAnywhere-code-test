@@ -1,21 +1,30 @@
-import { FC, useState } from 'react';
-import ChapterModal from './ChapterModal';
-import { ICharacterProps } from './types';
+import { FC, useState } from "react";
+import ChapterModal from "./ChapterModal";
+import { ICharacterProps } from "./types";
 
 const CharacterCard: FC<ICharacterProps> = (props): JSX.Element => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const toggleModalState = (e: any) => {
     e.stopPropagation();
-    setModalOpen(prev => !prev)
-  }
-  const {image, origin, location, name, episode, species, status, gender} = props;
+    setModalOpen((prev) => !prev);
+  };
+  const { image, origin, location, name, episode, species, status, gender } =
+    props;
+  const episodes = episode.reduce((current, next) => {
+    const newCurr = [...current];
+    newCurr.push(next.data);
+    return newCurr;
+  }, []);
   return (
     <div className="characterCard">
       <img className="characterCard__img" src={image} alt="character" />
       <div className="characterCard__content">
         <div className="characterCard__top">
           <h3 className="characterCard__name">{name}</h3>
-          <p className="characterCard__status">{status}<span className={status}></span></p>
+          <p className="characterCard__status">
+            {status}
+            <span className={status}></span>
+          </p>
         </div>
         <div className="characterCard__desc">
           <div className="characterCard__block">
@@ -36,11 +45,15 @@ const CharacterCard: FC<ICharacterProps> = (props): JSX.Element => {
             </div>
             <div className="characterCard__info">
               <p className="characterCard__info--title">DIMENSION</p>
-              <p className="characterCard__info--text">{origin.dimension ? origin.dimension : "unknown"}</p>
+              <p className="characterCard__info--text">
+                {origin.dimension ? origin.dimension : "unknown"}
+              </p>
             </div>
             <div className="characterCard__info">
               <p className="characterCard__info--title">RESIDENTS</p>
-              <p className="characterCard__info--text">{origin.residents ? origin.residents.length : 0}</p>
+              <p className="characterCard__info--text">
+                {origin.residents ? origin.residents.length : 0}
+              </p>
             </div>
           </div>
 
@@ -52,11 +65,15 @@ const CharacterCard: FC<ICharacterProps> = (props): JSX.Element => {
             </div>
             <div className="characterCard__info">
               <p className="characterCard__info--title">DIMENSION</p>
-              <p className="characterCard__info--text">{location.dimension ? location.dimension : "unknown"}</p>
+              <p className="characterCard__info--text">
+                {location.dimension ? location.dimension : "unknown"}
+              </p>
             </div>
             <div className="characterCard__info">
               <p className="characterCard__info--title">RESIDENTS</p>
-              <p className="characterCard__info--text">{location.residents ? location.residents.length : 0}</p>
+              <p className="characterCard__info--text">
+                {location.residents ? location.residents.length : 0}
+              </p>
             </div>
           </div>
 
@@ -64,16 +81,22 @@ const CharacterCard: FC<ICharacterProps> = (props): JSX.Element => {
             <div className="characterCard__info">
               <p className="characterCard__info--title">CHAPTERS</p>
               <div className="characterCard__info--text">
-                <p>Character featured in <span>{episode.length}</span> chapters</p>
-                <button onClick={toggleModalState}>View Chapter information</button>
+                <p>
+                  Character featured in <span>{episode.length}</span> chapters
+                </p>
+                <button onClick={toggleModalState}>
+                  View Chapter information
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      {modalOpen && <ChapterModal episodes={episode} closeModal={toggleModalState} />}
+      {modalOpen && (
+        <ChapterModal episodes={episodes} closeModal={toggleModalState} />
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default CharacterCard
+export default CharacterCard;

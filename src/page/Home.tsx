@@ -1,28 +1,43 @@
-import useFetchCharacters from '../hooks/useFetchCharacters';
-import CharacterCard from '../components/CharacterCard';
-import rickMorty from '../assets/screen-5.png';
+import useFetchCharacters from "../hooks/useFetchCharacters";
+import CharacterCard from "../components/CharacterCard";
+import rickMorty from "../assets/screen-5.png";
+import ContentLoaderFile from "../components/ContentLoader";
 
 const Home = () => {
-  const {characters} = useFetchCharacters();
+  const { characters } = useFetchCharacters();
 
   const renderCharacterCard = () => {
-    if(characters.length > 0) {
-      return characters.map(character => {
-        const {id, name, gender, species, status, image, origin, location, episode} = character;
+    if (characters.length > 0) {
+      return characters.map((character) => {
+        const {
+          id,
+          name,
+          gender,
+          species,
+          status,
+          image,
+          origin,
+          location,
+          episode,
+        } = character;
         return (
-        <CharacterCard
-          key={id}
-          name={name}
-          gender={gender}
-          species={species}
-          status={status}
-          image={image}
-          origin={origin}
-          location={location}
-          episode={episode}/>)
-      })
+          <CharacterCard
+            key={id}
+            name={name}
+            gender={gender}
+            species={species}
+            status={status}
+            image={image}
+            origin={origin}
+            location={location}
+            episode={episode}
+          />
+        );
+      });
+    } else {
+      return <ContentLoaderFile />;
     }
-  }
+  };
   return (
     <main className="home">
       <section className="home__banner">
@@ -33,12 +48,10 @@ const Home = () => {
         </div>
       </section>
       <section className="home__body">
-        <div className="home__content">
-          {renderCharacterCard()}
-        </div>
+        <div className="home__content">{renderCharacterCard()}</div>
       </section>
     </main>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

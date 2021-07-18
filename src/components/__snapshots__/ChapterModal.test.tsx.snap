@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chapter Modal Test Should take snapshot of modal 1`] = `
+<DocumentFragment>
+  <div
+    class="modal__backdrop"
+  >
+    <div
+      class="modal__body"
+      data-testid="modal-body"
+    >
+      <button
+        class="modal__close"
+      >
+        X
+      </button>
+      <h3>
+        CHAPTERS CHARACTER FEATURED IN
+      </h3>
+      <div
+        class="characterCard__info--text"
+        data-testid="chapter-list"
+      >
+        <p
+          data-testid="chapter-item"
+        >
+          S01E06 - 
+          <span>
+            Rick Potion #9
+          </span>
+          ,
+        </p>
+        <p
+          data-testid="chapter-item"
+        >
+          S01E06 - 
+          <span>
+            Rick Potion #9
+          </span>
+          ,
+        </p>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
